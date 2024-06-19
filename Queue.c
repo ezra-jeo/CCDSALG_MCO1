@@ -1,6 +1,6 @@
 #include <stdio.h>
 #define MAX_SIZE 255
-// Edit, pull test
+// Edit, pull test panget mos
 
 struct QueueTag 
 {
