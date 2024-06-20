@@ -5,7 +5,7 @@
 // #include "stack 2.c"
 // #include "queue 2.c"
 
-typedef char String255[256];
+typedef char String[256];
 
 /*  isNum determines whether a character element represents an integer.
     @param elem, character element to determine if is an integer;
@@ -77,6 +77,8 @@ int evaluateUnary(int operand1, Operator op)
 
     if (strcmp(op, "!") == 0)
         result = !operand1;
+
+    return result;
 }
 
 /*  evaluatePostfix evaluates a given postfix expression.
@@ -94,7 +96,7 @@ void evaluatePostfix(Queue queue, int *result)
     int operand2 = 0;
     int divisionByZero = 0; // Division by zero flag
     char buffer; // Buffer for dequeued elements
-    String255 operand = ""; // String to use to convert multidigit nums to integers.
+    String operand = ""; // String to use to convert multidigit nums to integers.
     Operator operator; // String to use to convert operators to string equivalents.
     StackOperand operands = createStackOperand();
 
