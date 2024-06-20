@@ -1,3 +1,4 @@
+// This C file contains the implementations and definitions for evaluating postfix expressions.
 
 /*  isNum determines whether a character element represents an integer.
     @param elem, character element to determine if is an integer
@@ -154,7 +155,7 @@ evaluatePostfix(Queue queue)
             while(buffer != ' ' && !isEmpty)
             {   
                 operand[operandCtr++] = buffer;
-                if (!queueEmpty(queue))
+                if (!isQueueEmpty(queue))
                     buffer = dequeue(&queue);
                 else
                     isEmpty = 1;
@@ -171,7 +172,7 @@ evaluatePostfix(Queue queue)
                 operator[operatorCtr++] = buffer;
                 operator[operatorCtr] = '\0';
 
-                if (!queueEmpty(queue))
+                if (!isQueueEmpty(queue))
                     buffer = dequeue(&queue);
                 else
                     isEmpty = 1;
