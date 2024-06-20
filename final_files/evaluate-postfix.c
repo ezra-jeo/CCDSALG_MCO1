@@ -1,4 +1,3 @@
-typedef char String[256];
 
 /*  isNum determines whether a character element represents an integer.
     @param elem, character element to determine if is an integer
@@ -163,11 +162,6 @@ evaluatePostfix(Queue queue)
             
             // Push to the stack
             pushOperand(&operands, toNum(operand)); // converts string to corresponding integer.
-
-            //Tracker for debugging.
-            // stackOperandDisplay(operands);
-            // printf("\n");
-
         }
         else // If not an integer, then an operator
         {
@@ -199,13 +193,6 @@ evaluatePostfix(Queue queue)
                 {
                     // Push the resulting value back to the stack           
                     pushOperand(&operands, evaluate(operand1, operand2, operator));
-
-                    //Tracker for debugging.
-                    // printf("\nPop 1: %d, Pop 2: %d, operator %s\n", operand1, operand2, operator);
-                    // printf("%d\n", evaluate(operand1, operand2, operator));
-                    // stackOperandDisplay(operands);
-                    // printf("\n");
-
                 }
             }
             else // if unary expression
@@ -213,38 +200,10 @@ evaluatePostfix(Queue queue)
                 // Pop operand for unary expression
                 operand1 = popOperand(&operands);
                 pushOperand(&operands, evaluateUnary(operand1, operator)); // Push the resulting value back to the stack
-
-                // Tracker for debugging.
-                // printf("\nPop 1: %d, operator %s\n", operand1, operator);
-                // printf("%d\n", evaluateUnary(operand1, operator));
-                // stackOperandDisplay(operands);
-                // printf("\n");
-
             }
-
-
         }
     }
 
     if (!divisionByZero) // If a valid result
         printf("%d\n",popOperand(&operands)); // Print the result
 }
-
-// int main()
-// {
-//     int i;
-//     Queue postfix = createQueue();
-//     Operator op = "+";
-//     char infix[255] = "10 3 %";
-//     for (i = 0; i < 6; i++)
-//     {
-//         enqueue(&postfix, infix[i]);
-//     }
-//     //queueDisplay(postfix);
-//     int result = 0;
-//     evaluatePostfix(postfix, &result);
-//     printf("\nResult: %d\n", result);
-//     // printf("%d %d\n", evaluate(4, 2, "+"), 4 + 2);
-
-//     return 0;
-// }
