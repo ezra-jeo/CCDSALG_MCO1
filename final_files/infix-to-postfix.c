@@ -5,7 +5,7 @@
 //typedef char String[256];
 
 int 
-hasLeftAssociative (Operator operator)
+hasLeftAssociative(Operator operator)
 {
     if (strcmp(operator, "!") == 0 || strcmp(operator, "^") == 0)
         return -1;
@@ -13,7 +13,7 @@ hasLeftAssociative (Operator operator)
         return 1;
 }
 int
-hasHigherPriority (Operator operatorInfix, Operator operatorStack) 
+hasHigherPriority(Operator operatorInfix, Operator operatorStack) 
 {
     Operator priorityTable[9][4] = {{"!"},
                                     {"^"},
@@ -48,19 +48,21 @@ hasHigherPriority (Operator operatorInfix, Operator operatorStack)
 }
 
 void
-displayPostfix (Queue postfix) 
+displayPostfix(Queue postfix) 
 {
-    while (!queueEmpty(postfix))
+    printf("Postfix: ");
+    while (!isQueueEmpty(postfix))
         printf("%c", dequeue(&postfix));
 
     printf("\n\n");
 }
 
 void
-displayStack (StackOperator stack)
+displayStack(StackOperator stack)
 {
     int i = 0;
 
+    printf("Stack: ");
     while (i <= stack.top) {
         printf("%s ", stack.list[i]);
         i++;
@@ -70,7 +72,7 @@ displayStack (StackOperator stack)
 }
 
 Queue
-convertToPostfix (String infix) 
+convertToPostfix(String infix) 
 {
     StackOperator stack = createStackOperator();
     Operator      operatorInfix;
@@ -79,7 +81,6 @@ convertToPostfix (String infix)
     int           size = strlen(infix);
     int           i = 0;
     int           k = 0;
-    char          temp;
 
     while (i < size) 
     {
@@ -87,17 +88,15 @@ convertToPostfix (String infix)
         {
             do
             {
-                if (!queueFull(postfix))
+                if (!isQueueFull(postfix))
                     enqueue(&postfix, infix[i]);
                 i++;            
             } while (isdigit(infix[i]));
 
-            if (!queueFull(postfix))
+            if (!isQueueFull(postfix))
                 enqueue(&postfix, ' ');
 
-            printf("Stack: ");
             displayStack(stack);
-            printf("Postfix: ");
             displayPostfix(postfix);
         }
         else 
@@ -121,16 +120,14 @@ convertToPostfix (String infix)
             if (strcmp(operatorInfix, "(") == 0) 
             {
                 pushOperator(&stack, operatorInfix);
-                printf("Stack: ");
                 displayStack(stack);
-                printf("Postfix: ");
                 displayPostfix(postfix);
             }
             else if (strcmp(operatorInfix, ")") == 0)
             {
                 do
                 {
-                    topOperator(stack, operatorStack);
+                    getTopOperator(stack, operatorStack);
                     popOperator(&stack, operatorStack);
 
                     if (strcmp(operatorStack, "(") != 0)
@@ -138,71 +135,63 @@ convertToPostfix (String infix)
                         k = 0;
                         while (k < strlen(operatorStack)) 
                         {
-                            if (!queueFull(postfix)) 
+                            if (!isQueueFull(postfix)) 
                                 enqueue(&postfix, operatorStack[k]);
-                                k++;
+                            k++;
                         }
-                        if (!queueFull(postfix))
+                        if (!isQueueFull(postfix))
                             enqueue(&postfix, ' ');
 
-                        printf("Stack: ");
                         displayStack(stack);
-                        printf("Postfix: ");
                         displayPostfix(postfix);
                     }
                 } while (strcmp(operatorStack, "(") != 0);
             }
             else 
             {
-                if (stackOperatorEmpty(stack)) {
+                if (isStackOperatorEmpty(stack)) {
                     pushOperator(&stack, operatorInfix);
 
-                    printf("Stack: ");
                     displayStack(stack);
-                    printf("Postfix: ");
                     displayPostfix(postfix);
                 }
                 else 
                 {
                     do
                     {
-                        topOperator(stack, operatorStack);
+                        getTopOperator(stack, operatorStack);
 
                         if (hasHigherPriority(operatorInfix, operatorStack) != 1 && hasLeftAssociative(operatorInfix) == 1) 
                         {
-                            if (!stackOperatorEmpty(stack))
+                            if (!isStackOperatorEmpty(stack))
                                 popOperator(&stack, operatorStack);
 
                             k = 0;
                             while (k < strlen(operatorStack)) 
                             {
-                                if (!queueFull(postfix)) 
+                                if (!isQueueFull(postfix)) 
                                     enqueue(&postfix, operatorStack[k]);
                                 k++;
                             }
-                            if (!queueFull(postfix))
+                            if (!isQueueFull(postfix))
                                 enqueue(&postfix, ' ');
                         }
                         else 
                         {
-                            if (!stackOperatorFull(stack))
+                            if (!isStackOperatorFull(stack))
                                 pushOperator(&stack, operatorInfix);
                         }
 
-                        printf("Stack: ");
                         displayStack(stack);
-                        printf("Postfix: ");
                         displayPostfix(postfix);
-                    } while (!stackOperatorEmpty(stack) && hasHigherPriority(operatorInfix, operatorStack) != 1 && hasLeftAssociative(operatorInfix) == 1);
+                    } while (!isStackOperatorEmpty(stack) && hasHigherPriority(operatorInfix, operatorStack) != 1 && hasLeftAssociative(operatorInfix) == 1);
 
-                    if (stackOperatorEmpty(stack))
+                    if (isStackOperatorEmpty(stack))
                     {
-                        if (!stackOperatorFull(stack))
+                        if (!isStackOperatorFull(stack))
                             pushOperator(&stack, operatorInfix);
 
-                        printf("Stack: ");
                         displayStack(stack);
-                        printf("Postfix: ");
                         displayPostfix(postfix);
                     }
                 }
@@ -210,23 +199,21 @@ convertToPostfix (String infix)
         }
     }
 
-    while (!stackOperatorEmpty(stack)) 
+    while (!isStackOperatorEmpty(stack)) 
     {
         popOperator(&stack, operatorStack);
         k = 0;
         while (k < strlen(operatorStack)) 
         {
-            if (!queueFull(postfix))
+            if (!isQueueFull(postfix))
                 enqueue(&postfix, operatorStack[k]);
             k++;
         }
 
-        if (!queueFull(postfix) && !stackOperatorEmpty(stack))
+        if (!isQueueFull(postfix) && !isStackOperatorEmpty(stack))
             enqueue(&postfix, ' ');
 
-        printf("Stack: ");
         displayStack(stack);
-        printf("Postfix: ");
         displayPostfix(postfix);
     }
 
