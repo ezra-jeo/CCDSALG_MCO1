@@ -1,3 +1,5 @@
+typedef char String[256];
+
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -6,7 +8,6 @@
 #include "evaluate-postfix.c"
 #include "infix-to-postfix.c"
 
-typedef char String[256];
 
 int main()
 {
