@@ -107,13 +107,7 @@ evaluate(int operand1, int operand2, Operator op)
 int 
 evaluateUnary(int operand, Operator op)
 {
-    int result = 0; // Variable to hold the result
-
-    // Checking if logical not and evaluating the operation
-    if (strcmp(op, "!") == 0)
-        result = !operand;
-
-    return result;
+    return !operand; // since the only unary operation is the logical not
 }
 
 /* evaluatePostfix() evaluates a given postfix expression.
@@ -153,6 +147,8 @@ evaluatePostfix(Queue queue)
             while(buffer != ' ' && !isEmpty)
             {   
                 operand[operandCtr++] = buffer;
+                operand[operandCtr] = '\0';
+
                 if (!isQueueEmpty(queue))
                     buffer = dequeue(&queue);
                 else
