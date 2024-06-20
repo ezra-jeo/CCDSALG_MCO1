@@ -179,7 +179,8 @@ evaluatePostfix(Queue queue)
                 operand2 = popOperand(&operands);
                 operand1 = popOperand(&operands);
 
-                if (operand2 == 0 && (strcmp(operator, "/") == 0 || strcmp(operator, "%") == 0)) // If a zero division case
+                if ((operand2 == 0 && (strcmp(operator, "/") == 0 || strcmp(operator, "%") == 0)) ||
+                    (operand1 == 0 && operand2 < 0 && (strcmp(operator, "^") == 0))) // If a zero division case
                 {
                     divisionByZero = 1; // Flag, which also terminates the while loop
                     printf("Division by zero error!\n"); // Error message
