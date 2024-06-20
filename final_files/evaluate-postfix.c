@@ -1,8 +1,8 @@
 // This C file contains the implementations and definitions for evaluating postfix expressions.
 
-/*  isNum determines whether a character element represents an integer.
-    @param elem, character element to determine if is an integer
-    @return 1 if true, 0 if false
+/* isNum() determines whether a character element represents an integer.
+   @param elem - the character element to determine if is an integer.
+   @return 1 if true and 0 if false.
 */
 int 
 isNum(char elem)
@@ -17,10 +17,10 @@ isNum(char elem)
     return isNum; 
 }
 
-/*  power raises a number by another number as exponent.
-    @param a, base integer
-    @param b, exponent
-    @return result of the exponentiation
+/* power() raises a number by another number as exponent.
+   @param a - the base integer.
+   @param b - the exponent.
+   @return the result of the exponentiation.
 */
 int 
 power(int a, int b)
@@ -36,9 +36,9 @@ power(int a, int b)
     return result;
 }
 
-/*  toNum converts the string representation of number to the integer equivalent.
-    @param number, number in string form
-    @return number in integer form
+/* toNum() converts the string representation of number to the integer equivalent.
+   @param number - a number in string form.
+   @return the number in integer form.
 */
 int 
 toNum(String number)
@@ -53,14 +53,13 @@ toNum(String number)
     }
     
     return result;
-
 }
 
-/*  evaluate evaluates the expression given two operands and an operator.
-    @param operand1, first integer operand
-    @param operand2, second integer operand
-    @param op, operator as a string
-    @return result of the evaluation
+/* evaluate() evaluates the expression given two operands and an operator.
+   @param operand1 - the first integer operand.
+   @param operand2 - the second integer operand.
+   @param op - the operator as a string.
+   @return the result of the evaluation.
 */
 int 
 evaluate(int operand1, int operand2, Operator op)
@@ -100,10 +99,10 @@ evaluate(int operand1, int operand2, Operator op)
     return result;
 }
 
-/*  evaluateUnary evaluates a unary expresion.
-    @param operand, integer operand
-    @param op, unary operator as a string
-    @return result of the evaluation
+/* evaluateUnary() evaluates a unary expresion.
+   @param operand - the integer operand.
+   @param op - the unary operator as a string.
+   @return the result of the evaluation.
 */
 int 
 evaluateUnary(int operand, Operator op)
@@ -117,9 +116,8 @@ evaluateUnary(int operand, Operator op)
     return result;
 }
 
-/*  evaluatePostfix evaluates a given postfix expression.
-    @param queue, resulting queue of the postfix conversion
-    @return None
+/* evaluatePostfix() evaluates a given postfix expression.
+   @param queue - the resulting queue of the postfix conversion.
 */
 void 
 evaluatePostfix(Queue queue)
@@ -128,8 +126,8 @@ evaluatePostfix(Queue queue)
     int isEmpty = 0;        // Flag if empty
     int operatorCtr = 0;    // Counter for when obtaining string representation of operator
     int operandCtr = 0;     // Counter for when obtaining string representation of operand
-    int operand1 = 0;       // first operand
-    int operand2 = 0;       // second operand
+    int operand1 = 0;       // First operand
+    int operand2 = 0;       // Second operand
     int divisionByZero = 0; // Division by zero flag
     char buffer;            // Buffer for dequeued elements
     String operand = "";    // String to use to convert multidigit nums to integers.
