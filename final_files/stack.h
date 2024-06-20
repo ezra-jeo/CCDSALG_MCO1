@@ -4,6 +4,8 @@
 
 typedef char Operator[3];
 
+// Operator Stack
+
 struct stackOperatorTag 
 {
     int      size;
@@ -12,6 +14,8 @@ struct stackOperatorTag
 };
 
 typedef struct stackOperatorTag StackOperator;
+
+// Operand Stack
 
 struct stackOperandTag 
 {
