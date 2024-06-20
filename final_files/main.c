@@ -18,11 +18,11 @@ int main()
     {
         scanf("%s", infix);
         scanf("%*c");
-        printf("\n");
         if (strcmp(infix, "QUIT") != 0)
         {
             postfix = convertToPostfix(infix);
             evaluatePostfix(postfix);
+            printf("\n");
         }
     } while (strcmp(infix, "QUIT") != 0);
     
