@@ -12,7 +12,6 @@ int main()
 {
     String infix;
     Queue postfix;
-    int result;
 
     do
     {
