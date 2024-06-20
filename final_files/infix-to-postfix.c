@@ -144,7 +144,6 @@ convertToPostfix(String infix)
                 // This group of codes pops the operator tokens from the stack and stores them into the postfix queue until it is the "(" token.
                 do
                 {
-                    //getTopOperator(stack, operatorStack);
                     popOperator(&stack, operatorStack);
 
                     if (strcmp(operatorStack, "(") != 0)
